@@ -38,14 +38,29 @@ public class MainActivity extends AppCompatActivity {
 
                 if(isian_nama_depan.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Isian masih kosong", Toast.LENGTH_SHORT).show();
-                }else{
-                    String nama_lengkap = isian_nama_depan.concat(" ").concat(isian_nama_belakang).concat(isian_umur);
+                } else if (isian_umur.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Umur Belum Diisi", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    int jumlah_umur = Integer.parseInt(isian_umur);
+
+                    String nama_lengkap = isian_nama_depan.concat(" ").concat(isian_nama_belakang);
                     daftar_nama.clear();
                     daftar_nama.add(nama_lengkap);
+
+                    for (int i = 0; i < jumlah_umur; i++){
+                        daftar_nama.add(nama_lengkap);
+                    }
+
                     edNamaDepan.setText("");
                     edNamaBelakang.setText("");
-                    edUmur.setText("");
+
                     intent_list.putStringArrayListExtra("daftar_nama", daftar_nama);
+
+                    for (String nama : daftar_nama){
+                        System.out.println(nama);
+                    }
+
                     startActivity(intent_list);
                 }
             }
